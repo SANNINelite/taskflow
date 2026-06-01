@@ -2,6 +2,12 @@
 
 TaskFlow is a production-grade, highly scalable Task Management Platform designed with a modern Node.js/Express RESTful backend and an interactive, premium React/Vite frontend dashboard. The system incorporates robust JWT Authentication, Role-Based Access Control (RBAC), express-validator input sanitization, dynamic Swagger UI documentation, and high-performance MongoDB schemas.
 
+## 🔗 Live Demo & Links
+* **Production Web Dashboard (Vercel)**: [https://taskflow-two-nu.vercel.app](https://taskflow-two-nu.vercel.app)
+* **Production API Base (Render)**: [https://taskflow-ndcp.onrender.com](https://taskflow-ndcp.onrender.com)
+* **Interactive Swagger Documentation**: [https://taskflow-ndcp.onrender.com/api-docs](https://taskflow-ndcp.onrender.com/api-docs)
+* **GitHub Source Repository**: [https://github.com/SANNINelite/taskflow](https://github.com/SANNINelite/taskflow)
+
 ---
 
 ## ━━━━━━━━━━━━━━━━━━━━━━━
@@ -179,7 +185,7 @@ frontend/
 ### 🌐 Live Production Platform Links
 * **Live Production API (Render)**: [https://taskflow-ndcp.onrender.com](https://taskflow-ndcp.onrender.com)
 * **Interactive Swagger UI (Render)**: [https://taskflow-ndcp.onrender.com/api-docs](https://taskflow-ndcp.onrender.com/api-docs)
-* **Production Web Dashboard (Vercel)**: [https://taskflow-ndcp.vercel.app](https://taskflow-ndcp.vercel.app)
+* **Production Web Dashboard (Vercel)**: [https://taskflow-two-nu.vercel.app](https://taskflow-two-nu.vercel.app)
 
 ---
 
@@ -196,7 +202,7 @@ frontend/
    * `MONGODB_URI` = `mongodb+srv://<username>:<password>@cluster.mongodb.net/taskflow`
    * `JWT_SECRET` = `[Generative High-Entropy Secret String]`
    * `JWT_EXPIRES_IN` = `7d`
-   * `CLIENT_URL` = `https://taskflow-ndcp.vercel.app` (restricts CORS requests strictly to production client)
+   * `CLIENT_URL` = `https://taskflow-two-nu.vercel.app` (restricts CORS requests strictly to production client)
 
 ---
 
@@ -262,7 +268,10 @@ db.users.updateOne(
   { $set: { role: "admin" } }
 );
 ```
-
+option B:
+use below user id and pass:
+gmail: [swaroop1@gmail.com]
+password: [123456]
 ---
 
 ## ━━━━━━━━━━━━━━━━━━━━━━━
