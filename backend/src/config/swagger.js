@@ -14,8 +14,12 @@ const options = {
     },
     servers: [
       {
+        url: 'https://taskflow-ndcp.onrender.com',
+        description: 'Production Server',
+      },
+      {
         url: 'http://localhost:5000',
-        description: 'Local Development Server',
+        description: 'Local Development',
       },
     ],
     components: {

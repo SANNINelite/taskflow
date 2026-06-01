@@ -35,7 +35,7 @@ TaskFlow is a production-grade, highly scalable Task Management Platform designe
 2. **Dynamic Task Stats Widget**: Summarizes total, pending, in-progress, and completed tasks in real time on the dashboard.
 3. **Interactive Search & Status Filtering**: Real-time frontend matching on title/description and status-badge click triggers.
 4. **Interactive Swagger API Documentation**: Accessible at `/api-docs` with schema examples and Bearer Auth tests.
-5. **中央エラーハンドリング (Central Error Handler)**: Standardized server error response objects and custom operational error boundaries.
+5. **Central Error Handler**: Standardized server error response objects and custom operational error boundaries.
 
 ---
 
@@ -173,39 +173,43 @@ frontend/
 ---
 
 ## ━━━━━━━━━━━━━━━━━━━━━━━
-## 7. CLOUD DEPLOYMENT BLUEPRINTS
+## 7. CLOUD DEPLOYMENT BLUEPRINTS & LIVE DEPLOYMENTS
 ## ━━━━━━━━━━━━━━━━━━━━━━━
 
-### 🚀 Backend Deployment: Render
-1. Register/Login at [Render.com](https://render.com).
-2. Click **New +** and select **Web Service**.
-3. Connect your GitHub repository containing the project.
-4. Configure the following runtime options:
+### 🌐 Live Production Platform Links
+* **Live Production API (Render)**: [https://taskflow-ndcp.onrender.com](https://taskflow-ndcp.onrender.com)
+* **Interactive Swagger UI (Render)**: [https://taskflow-ndcp.onrender.com/api-docs](https://taskflow-ndcp.onrender.com/api-docs)
+* **Production Web Dashboard (Vercel)**: [https://taskflow-ndcp.vercel.app](https://taskflow-ndcp.vercel.app)
+
+---
+
+### 🚀 Backend Cloud Deployment (Render.com)
+1. **Create Web Service**: Register at Render and link your GitHub repository.
+2. **Build Settings**:
    * **Root Directory**: `backend`
    * **Runtime**: `Node`
    * **Build Command**: `npm install`
    * **Start Command**: `npm start`
-5. Click **Advanced** and add the required environment variables:
-   * `NODE_ENV`: `production`
-   * `MONGODB_URI`: *[Your MongoDB Atlas cloud connection URI]*
-   * `JWT_SECRET`: *[A long, high-entropy random key string]*
-   * `JWT_EXPIRES_IN`: `7d`
-   * `CLIENT_URL`: *[Your Vercel Frontend URL]*
-6. Click **Deploy Web Service**. Render will assign a public URL (e.g. `https://taskflow-api.onrender.com`).
+3. **Environment Variables**:
+   * `NODE_ENV` = `production`
+   * `PORT` = `10000` (Render handles internal network mapping)
+   * `MONGODB_URI` = `mongodb+srv://<username>:<password>@cluster.mongodb.net/taskflow`
+   * `JWT_SECRET` = `[Generative High-Entropy Secret String]`
+   * `JWT_EXPIRES_IN` = `7d`
+   * `CLIENT_URL` = `https://taskflow-ndcp.vercel.app` (restricts CORS requests strictly to production client)
 
 ---
 
-### 🎨 Frontend Deployment: Vercel
-1. Register/Login at [Vercel.com](https://vercel.com).
-2. Click **Add New** and choose **Project**.
-3. Import your GitHub repository.
-4. Configure build options:
+### 🎨 Frontend Cloud Deployment (Vercel.com)
+1. **Create Project**: Import your repository on Vercel.
+2. **Build Configuration**:
    * **Framework Preset**: `Vite`
    * **Root Directory**: `frontend`
    * **Build Command**: `npm run build`
    * **Output Directory**: `dist`
-5. Click **Deploy**. Vercel will host your static files and give you a public domain name (e.g., `https://taskflow.vercel.app`).
-6. *Note*: In `frontend/src/services/api.js`, update `API_BASE_URL` to point to your new Render backend URL (`https://your-app.onrender.com/api/v1`) before deploying to production.
+3. **Production Environment Variables**:
+   * **Key**: `VITE_API_URL`
+   * **Value**: `https://taskflow-ndcp.onrender.com/api/v1`
 
 ---
 
@@ -213,7 +217,7 @@ frontend/
 ## 8. SYSTEM SCALABILITY (HIGHLIGHT)
 ## ━━━━━━━━━━━━━━━━━━━━━━━
 
-For a deep systems architecture analysis explaining how TaskFlow scales to **100,000+ active users**, please refer to our comprehensive systems design notes in [scalability_architecture.md](file:///a:/project/New%20folder%20%282%29/scalability_architecture.md). It details:
+For a deep systems architecture analysis explaining how TaskFlow scales to **100,000+ active users**, please refer to our comprehensive systems design notes in [scalability_architecture.md](./scalability_architecture.md). It details:
 * Database Indexing strategies (`IXSCAN` optimization).
 * Redis Caching opportunities for task listings and JWT blacklisting.
 * Horizontal Autoscaling using Kubernetes and PM2.
