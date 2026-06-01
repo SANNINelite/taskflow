@@ -10,7 +10,7 @@ const signToken = (id) => {
 };
 
 const registerUser = async (userData) => {
-  const { name, email, password, role } = userData;
+  const { name, email, password } = userData;
 
   // 1) Prevent duplicate emails
   const existingUser = await User.findOne({ email });
@@ -23,7 +23,7 @@ const registerUser = async (userData) => {
     name,
     email,
     password,
-    role: role || 'user',
+    role: 'user',
   });
 
   // 3) Exclude password from the output

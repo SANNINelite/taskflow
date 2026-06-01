@@ -9,6 +9,7 @@ const router = express.Router();
  * /api/v1/auth/register:
  *   post:
  *     summary: Register a new user
+ *     description: Register a new user. All newly registered accounts are created with the "user" role by default.
  *     tags: [Authentication]
  *     requestBody:
  *       required: true
@@ -30,10 +31,6 @@ const router = express.Router();
  *               password:
  *                 type: string
  *                 example: mysecurepassword123
- *               role:
- *                 type: string
- *                 enum: [user, admin]
- *                 example: user
  *     responses:
  *       201:
  *         description: User registered successfully

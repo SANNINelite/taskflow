@@ -214,7 +214,59 @@ frontend/
 ---
 
 ## ━━━━━━━━━━━━━━━━━━━━━━━
-## 8. SYSTEM SCALABILITY (HIGHLIGHT)
+## 8. ROLE-BASED ACCESS CONTROL (RBAC) DESIGN
+## ━━━━━━━━━━━━━━━━━━━━━━━
+
+The TaskFlow platform implements a secure, industry-standard dual-role access control structure that operates on the principle of least privilege. 
+
+### 👤 User Role
+* **Permissions**:
+  * Register a new account (all public registrations receive the `user` role strictly).
+  * Log in and authenticate via stateless JWT tokens.
+  * Access the core Task Console.
+  * Execute full CRUD operations (`Create`, `Read`, `Update`, `Delete`) exclusively on tasks they created.
+  * Standard users are strictly blocked from retrieving lists of other registered platform users.
+
+### 🛡️ Admin Role
+* **Permissions**:
+  * Direct access to the secure Admin Panel.
+  * View a listing of all registered users on the platform (names, emails, creation dates, roles) to execute user telemetry audits.
+  * View all tasks across all users in the system on the Task Console.
+  * Modify or delete any task in the workspace.
+  * Bypass query-level filters while retaining strict API authentication checks.
+
+---
+
+### 🔑 Secure Admin Account Creation (Option A - Manual DB Seed/Update)
+To prevent privilege escalation, user-spoofing, or public endpoint registration exploits, **TaskFlow does not expose admin creation APIs or register controls to the client**. Admin promotion is handled out-of-band directly at the database layer (Option A).
+
+Follow these steps to configure an Administrator account for testing and evaluation:
+1. **Register a Standard User**: Open the TaskFlow frontend, navigate to `/register`, and create a standard user account.
+2. **Access MongoDB Atlas**: Log in to your cloud database console (or local Compass connection).
+3. **Locate the User Document**: Select your cluster, open database collections, and locate the document matching your user's email in the `users` table.
+4. **Elevate Role Privilege**: Update the `role` field value of the target document:
+   * **Before**:
+     ```json
+     { "role": "user" }
+     ```
+   * **After**:
+     ```json
+     { "role": "admin" }
+     ```
+5. **Re-authenticate**: Log out of the frontend console and sign back in. The system will parse the updated JWT payload and load the Administrator Dashboard controls instantly.
+
+Alternatively, execute the following script in the MongoDB shell context:
+```javascript
+db.users.updateOne(
+  { email: "admin@example.com" },
+  { $set: { role: "admin" } }
+);
+```
+
+---
+
+## ━━━━━━━━━━━━━━━━━━━━━━━
+## 9. SYSTEM SCALABILITY (HIGHLIGHT)
 ## ━━━━━━━━━━━━━━━━━━━━━━━
 
 For a deep systems architecture analysis explaining how TaskFlow scales to **100,000+ active users**, please refer to our comprehensive systems design notes in [scalability_architecture.md](./scalability_architecture.md). It details:

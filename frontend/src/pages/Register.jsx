@@ -145,7 +145,7 @@ const Register = () => {
             </div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ marginBottom: '28px' }}>
             <label className="form-label" htmlFor="register-password">Password</label>
             <div style={{ position: 'relative' }}>
               <span style={{
@@ -171,27 +171,6 @@ const Register = () => {
                 required
               />
             </div>
-          </div>
-
-          <div className="form-group" style={{ marginBottom: '28px' }}>
-            <label className="form-label" htmlFor="register-role">Account Security Role</label>
-            <select
-              id="register-role"
-              className="form-input"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              disabled={isSubmitting}
-              style={{
-                cursor: 'pointer',
-                background: 'var(--bg-tertiary) url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3E%3Cpath stroke=\'%239ca3af\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M6 8l4 4 4-4\'/%3E%3C/svg%3E") no-repeat right 12px center',
-                backgroundSize: '20px',
-                appearance: 'none',
-                paddingRight: '40px'
-              }}
-            >
-              <option value="user">Standard User (Manages own tasks)</option>
-              <option value="admin">Administrator (Manages all tasks + views users list)</option>
-            </select>
           </div>
 
           <button
